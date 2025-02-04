@@ -1,6 +1,0 @@
-.__pycache__,
-.requirements.txt,
-.scaler.pkl,
-.model.joblib,
-.diabetes_model.pkl
-
