@@ -2,11 +2,8 @@
 
 from fastapi import FastAPI, HTTPException
 from fastapi.staticfiles import StaticFiles
-<<<<<<< HEAD
 from fastapi.responses import HTMLResponse
-=======
 from fastapi.responses import HTMLResponse  # Import HTMLResponse
->>>>>>> d1a964b62f2d6a20e8fb42c07215627b80ebf02f
 from pydantic import BaseModel
 import numpy as np
 import joblib
