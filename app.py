@@ -80,8 +80,5 @@ def predict_diabetes(input: DiabetesInput):
 @app.get("/")
 def read_root():
     with open("static/index.html", "r") as file:
-<<<<<<< HEAD
         return HTMLResponse(content=file.read())
-=======
-        return HTMLResponse(content=file.read())
->>>>>>> d1a964b62f2d6a20e8fb42c07215627b80ebf02f
+
