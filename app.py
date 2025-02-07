@@ -1,9 +1,7 @@
-
-
 from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import HTMLResponse
-from fastapi.responses import HTMLResponse  # Import HTMLResponse
 from pydantic import BaseModel
 import numpy as np
 import joblib
@@ -26,7 +24,16 @@ except Exception as e:
 # Initialize FastAPI
 app = FastAPI()
 
-# Serve static files (HTML, CSS, JS)
+# Enable CORS to allow requests from your frontend
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["https://diabete-predict-machine-learniing-vllx.onrender.com"],  # Update with your frontend URL
+    allow_credentials=True,
+    allow_methods=["*"],  # Allow all HTTP methods
+    allow_headers=["*"],  # Allow all headers
+)
+
+# Serve static files (HTML, CSS, JS, images)
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
 # Define request body structure
@@ -78,4 +85,3 @@ def predict_diabetes(input: DiabetesInput):
 def read_root():
     with open("static/index.html", "r") as file:
         return HTMLResponse(content=file.read())
-
