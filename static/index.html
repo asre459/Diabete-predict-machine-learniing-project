@@ -16,12 +16,9 @@
             background-image: url('static/image/diabete.jpg');
             background-size: cover;
             background-position: center;
-            
-           
         }
         .form-group {
             margin-bottom: 15px;
-           
         }
         label {
             display: block;
@@ -50,7 +47,11 @@
             margin-top: 20px;
             font-weight: bold;
             color: hwb(310 8% 7%);
-        
+        }
+        .loading {
+            color: orange;
+            font-weight: bold;
+            margin-top: 10px;
         }
     </style>
 </head>
@@ -92,11 +93,14 @@
         <button type="submit">Predict</button>
     </form>
 
+    <div class="loading" id="loading" style="display: none;">Processing...</div>
     <div class="result" id="result"></div>
 
     <script>
         document.getElementById('predictionForm').addEventListener('submit', async function(event) {
             event.preventDefault();
+            document.getElementById('loading').style.display = 'block';
+            document.getElementById('result').innerText = '';
 
             const formData = {
                 pregnancies: parseInt(document.getElementById('pregnancies').value),
@@ -118,19 +122,22 @@
                     body: JSON.stringify(formData),
                 });
 
+                document.getElementById('loading').style.display = 'none';
+
                 if (!response.ok) {
-                    throw new Error('Network response was not ok');
+                    const errorMessage = await response.text();
+                    throw new Error(`Server Error: ${errorMessage}`);
                 }
 
                 const result = await response.json();
-                document.getElementById('result').innerText = `Prediction: ${result.prediction === 1 ? 'Diabetic is found to this person ' : 'Not Diabetic person'}`;
+                document.getElementById('result').innerText = 
+                    `Prediction: ${result.prediction === 1 ? 'Diabetic is found in this person' : 'Not a Diabetic person'}`;
             } catch (error) {
                 console.error('Error:', error);
-                document.getElementById('result').innerText = 'Error making prediction.';
+                document.getElementById('result').innerText = 'Error making prediction. Check console for details.';
+                document.getElementById('loading').style.display = 'none';
             }
         });
     </script>
 </body>
-
-</html> 
 </html>
