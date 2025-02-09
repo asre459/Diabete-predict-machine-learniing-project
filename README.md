@@ -1,4 +1,5 @@
 Diabetes Prediction API
+## api link https://diabete-predict-machine-learniing-vllx.onrender.com/
 This project uses machine learning to predict whether a patient has diabetes based on a set of health-related features. It uses a Logistic Regression model and is deployed as a FastAPI service.
 
 Steps to Reproduce
